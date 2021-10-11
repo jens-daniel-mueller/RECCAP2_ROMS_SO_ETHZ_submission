@@ -14,13 +14,22 @@
 
 <title>Overview XYT variables</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -28,8 +37,6 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -53,11 +60,6 @@ div.section {
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -70,32 +72,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -105,10 +82,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -125,40 +98,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -186,7 +132,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -198,7 +144,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -209,10 +155,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -224,7 +183,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -359,7 +317,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -378,7 +336,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">ROMS_Atlantic_ETHZ RECCAP-ocean</a>
+      <a class="navbar-brand" href="index.html">ROMS_SO_ETHZ RECCAP-ocean</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -412,7 +370,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission">
+  <a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission">
     <span class="fa fa-github"></span>
      
     Source code
@@ -430,11 +388,11 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 </ul>
@@ -444,7 +402,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Overview XYT variables</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">08 July, 2021</h4>
+<h4 class="date">11 October, 2021</h4>
 
 </div>
 
@@ -469,13 +427,13 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-07-08
+<strong>Last updated:</strong> 2021-10-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>RECCAP2_ROMS_Atlantic_ETHZ_submission/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>RECCAP2_ROMS_SO_ETHZ_submission/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -560,16 +518,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerRECCAP2ROMSAtlanticETHZsubmissiontree6c110d4ba7cd6b7a6d78afdac030e20b75c7b633targetblank6c110d4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/tree/6c110d4ba7cd6b7a6d78afdac030e20b75c7b633" target="_blank">6c110d4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerRECCAP2ROMSSOETHZsubmissiontree5e00331458c1a70317905ec9a1509284bc4dbb76targetblank5e00331a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/tree/5e00331458c1a70317905ec9a1509284bc4dbb76" target="_blank">5e00331</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerRECCAP2ROMSAtlanticETHZsubmissiontree6c110d4ba7cd6b7a6d78afdac030e20b75c7b633targetblank6c110d4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerRECCAP2ROMSSOETHZsubmissiontree5e00331458c1a70317905ec9a1509284bc4dbb76targetblank5e00331a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/tree/6c110d4ba7cd6b7a6d78afdac030e20b75c7b633" target="_blank">6c110d4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/tree/5e00331458c1a70317905ec9a1509284bc4dbb76" target="_blank">5e00331</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -580,6 +538,7 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
+    Modified:   analysis/_site.yml
     Modified:   code/Workflowr_project_managment.R
     Modified:   data/overview/overview_files.csv
 
@@ -625,50 +584,16 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/6c110d4ba7cd6b7a6d78afdac030e20b75c7b633/analysis/diagnostics_variables_XYT.Rmd" target="_blank">6c110d4</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/5e00331458c1a70317905ec9a1509284bc4dbb76/analysis/diagnostics_variables_XYT.Rmd" target="_blank">5e00331</a>
 </td>
 <td>
 jens-daniel-mueller
 </td>
 <td>
-2021-07-08
+2021-10-11
 </td>
 <td>
-rerun with v20210707, the submitted files
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/9d76b3a05e82c7347dfc87991a7f2c83e0a4f8f6/docs/diagnostics_variables_XYT.html" target="_blank">9d76b3a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/diagnostics_variables_XYT.html" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-<td>
-Build site.
+first run with v2021108, the submitted files
 </td>
 </tr>
 <tr>
@@ -676,115 +601,13 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/40d42e57e616c7d9a34264ad3d4273c8a4275d64/analysis/diagnostics_variables_XYT.Rmd" target="_blank">40d42e5</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-<td>
-rerun with v20210624
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/c75940a892340c7b279dbc8c467fe19287003f32/docs/diagnostics_variables_XYT.html" target="_blank">c75940a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/ef0c1e22b58aa75df6ffd063fd24114f49d5dd78/analysis/diagnostics_variables_XYT.Rmd" target="_blank">ef0c1e2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-<td>
-drop non-existing files from overview
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/d6726c7faa7bb4d2b646ba83bc30105b02ec36b9/docs/diagnostics_variables_XYT.html" target="_blank">d6726c7</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/diagnostics_variables_XYT.html" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/16cb621834c1beb76e90a1fcbd99d496987c4536/analysis/diagnostics_variables_XYT.Rmd" target="_blank">16cb621</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-<td>
-build after copying and adapting template
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/analysis/diagnostics_variables_XYT.Rmd" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/analysis/diagnostics_variables_XYT.Rmd" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 <td>
 Initial commit
@@ -795,13 +618,13 @@ Initial commit
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/diagnostics_variables_XYT.html" target="_blank">74e0e12</a>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/diagnostics_variables_XYT.html" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 <td>
 Initial commit
@@ -833,7 +656,7 @@ experiment_IDs &lt;- c(&quot;A&quot;)</code></pre>
 <h1 number="2"><span class="header-section-number">2</span> Plots</h1>
 <p>Below, please find plots of the variables in the following order:</p>
 <ul>
-<li>alpha, dfeos, dissicos, epc100, epc1000, fgco2, fice, intpp, mld, no3os, o2os, pco2atm, po4os, sios, sos, spco2, talkos, tos</li>
+<li>alpha, dissicos, fgco2, fice, mld, no3os, o2os, pco2atm, sos, spco2, talkos, tos</li>
 </ul>
 <p>Plots for all variables are shown one after the other for the model runs:</p>
 <ul>
@@ -846,9 +669,9 @@ experiment_IDs &lt;- c(&quot;A&quot;)</code></pre>
     
     # read list of all files
     file &lt;- paste(i_variable,
-                  &quot;_ROMS-Atlantic-ETHZ_&quot;,
+                  &quot;_ROMS-SouthernOcean-ETHZ_&quot;,
                   i_experiment_ID,
-                  &quot;_1_gr_1980-2018_v20210707.nc&quot;,
+                  &quot;_1_gr_1980-2018_v20211008.nc&quot;,
                   sep = &quot;&quot;)
     print(file)
     
@@ -935,7 +758,7 @@ experiment_IDs &lt;- c(&quot;A&quot;)</code></pre>
     
   }
 }</code></pre>
-<pre><code>[1] &quot;alpha_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;alpha_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-1">
@@ -961,35 +784,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-1.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-1.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-1.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-1.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1021,42 +822,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-2.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-2.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-2.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-2.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;dfeos_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissicos_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-3.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-3">
@@ -1082,35 +861,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-3.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-3.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-3.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-3.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1142,42 +899,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-4.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-4.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-4.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-4.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;dissicos_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;fgco2_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-5.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-5">
@@ -1203,35 +938,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-5.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-5.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-5.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-5.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1263,42 +976,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-6.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-6.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-6.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-6.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;epc100_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;fice_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-7.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-7">
@@ -1324,35 +1015,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-7.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-7.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-7.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-7.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1384,42 +1053,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-8.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-8.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-8.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-8.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;epc1000_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;mld_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-9.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-9">
@@ -1445,35 +1092,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-9.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-9.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-9.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-9.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1505,42 +1130,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-10.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-10.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-10.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-10.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;fgco2_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3os_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-11.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-11">
@@ -1566,35 +1169,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-11.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-11.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-11.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-11.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1626,42 +1207,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-12.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-12.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-12.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-12.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;fice_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2os_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-13.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-13">
@@ -1687,24 +1246,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-13.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-13.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-13.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1736,31 +1284,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-14.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-14.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-14.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;intpp_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;pco2atm_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-15.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-15">
@@ -1786,35 +1323,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-15.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-15.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-15.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-15.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1846,42 +1361,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-16.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-16.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-16.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-16.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;mld_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;sos_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-17.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-17">
@@ -1907,35 +1400,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-17.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-17.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-17.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-17.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -1967,42 +1438,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-18.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-18.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-18.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-18.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;no3os_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;spco2_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-19.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-19">
@@ -2028,35 +1477,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-19.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-19.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-19.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-19.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -2088,42 +1515,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-20.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-20.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-20.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-20.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;o2os_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;talkos_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-21.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-21">
@@ -2149,35 +1554,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-21.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-21.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-21.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-21.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -2209,42 +1592,20 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-22.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-22.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-22.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-22.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;pco2atm_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
+<pre><code>[1] &quot;tos_ROMS-SouthernOcean-ETHZ_A_1_gr_1980-2018_v20211008.nc&quot;</code></pre>
 <p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-23.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-23">
@@ -2270,35 +1631,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-23.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-23.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-23.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-23.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -2330,761 +1669,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-24.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-24.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-24.png" target="_blank">74e0e12</a>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_SO_ETHZ_submission/blob/f8e6891706740ff9e3ab9de1372c2038398c485b/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-24.png" target="_blank">f8e6891</a>
 </td>
 <td>
 Jens Müller
 </td>
 <td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;po4os_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-25.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-25">
-Past versions of 2D_variables-25.png
-</button>
-</p>
-<div id="fig-2D_variables-25" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-25.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-25.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-25.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-26.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-26">
-Past versions of 2D_variables-26.png
-</button>
-</p>
-<div id="fig-2D_variables-26" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-26.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-26.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-26.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;sios_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-27.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-27">
-Past versions of 2D_variables-27.png
-</button>
-</p>
-<div id="fig-2D_variables-27" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-27.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-27.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-27.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-28.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-28">
-Past versions of 2D_variables-28.png
-</button>
-</p>
-<div id="fig-2D_variables-28" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-28.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-28.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-28.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;sos_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-29.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-29">
-Past versions of 2D_variables-29.png
-</button>
-</p>
-<div id="fig-2D_variables-29" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-29.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-29.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-29.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-30.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-30">
-Past versions of 2D_variables-30.png
-</button>
-</p>
-<div id="fig-2D_variables-30" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-30.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-30.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-30.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;spco2_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-31.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-31">
-Past versions of 2D_variables-31.png
-</button>
-</p>
-<div id="fig-2D_variables-31" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-31.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-31.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-31.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-32.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-32">
-Past versions of 2D_variables-32.png
-</button>
-</p>
-<div id="fig-2D_variables-32" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-32.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-32.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-32.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;talkos_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-33.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-33">
-Past versions of 2D_variables-33.png
-</button>
-</p>
-<div id="fig-2D_variables-33" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-33.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-33.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-33.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-34.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-34">
-Past versions of 2D_variables-34.png
-</button>
-</p>
-<div id="fig-2D_variables-34" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-34.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-34.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-34.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;tos_ROMS-Atlantic-ETHZ_A_1_gr_1980-2018_v20210707.nc&quot;</code></pre>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-35.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-35">
-Past versions of 2D_variables-35.png
-</button>
-</p>
-<div id="fig-2D_variables-35" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-35.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-35.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-35.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/diagnostics_variables_XYT.Rmd/2D_variables-36.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2D_variables-36">
-Past versions of 2D_variables-36.png
-</button>
-</p>
-<div id="fig-2D_variables-36" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/d9c4ccc409329c0a9aa668802efef3429b7d6e05/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-36.png" target="_blank">d9c4ccc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/80a141b496446d35d0facaa1ca53cfcbbe6af2dd/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-36.png" target="_blank">80a141b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/RECCAP2_ROMS_Atlantic_ETHZ_submission/blob/74e0e12c62eaa212ffe6763b79c8da32597f7ee5/docs/figure/diagnostics_variables_XYT.Rmd/2D_variables-36.png" target="_blank">74e0e12</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2021-06-18
+2021-10-11
 </td>
 </tr>
 </tbody>
@@ -3122,36 +1713,38 @@ other attached packages:
  [1] units_0.6-7     tidync_0.2.4    stars_0.5-2     sf_0.9-8       
  [5] abind_1.4-5     ggforce_0.3.3   metR_0.9.0      scico_1.2.0    
  [9] patchwork_1.1.1 collapse_1.5.0  forcats_0.5.0   stringr_1.4.0  
-[13] dplyr_1.0.5     purrr_0.3.4     readr_1.4.0     tidyr_1.1.2    
-[17] tibble_3.0.4    ggplot2_3.3.3   tidyverse_1.3.0 workflowr_1.6.2
+[13] dplyr_1.0.5     purrr_0.3.4     readr_1.4.0     tidyr_1.1.3    
+[17] tibble_3.1.3    ggplot2_3.3.5   tidyverse_1.3.0 workflowr_1.6.2
 
 loaded via a namespace (and not attached):
  [1] fs_1.5.0                 lubridate_1.7.9          httr_1.4.2              
  [4] rprojroot_2.0.2          tools_4.0.3              backports_1.1.10        
- [7] R6_2.5.0                 KernSmooth_2.23-17       DBI_1.1.0               
-[10] colorspace_1.4-1         withr_2.3.0              tidyselect_1.1.0        
-[13] compiler_4.0.3           git2r_0.27.1             cli_2.1.0               
-[16] rvest_0.3.6              RNetCDF_2.4-2            xml2_1.3.2              
-[19] labeling_0.4.2           scales_1.1.1             checkmate_2.0.0         
-[22] classInt_0.4-3           digest_0.6.27            rmarkdown_2.5           
-[25] pkgconfig_2.0.3          htmltools_0.5.0          dbplyr_1.4.4            
-[28] rlang_0.4.10             readxl_1.3.1             rstudioapi_0.11         
-[31] PCICt_0.5-4.1            farver_2.0.3             generics_0.0.2          
-[34] jsonlite_1.7.1           magrittr_1.5             ncmeta_0.3.0            
-[37] Matrix_1.2-18            Rcpp_1.0.5               munsell_0.5.0           
-[40] fansi_0.4.1              lifecycle_1.0.0          stringi_1.5.3           
-[43] whisker_0.4              yaml_2.2.1               MASS_7.3-53             
-[46] grid_4.0.3               blob_1.2.1               parallel_4.0.3          
-[49] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
-[52] haven_2.3.1              hms_0.5.3                knitr_1.30              
-[55] pillar_1.4.7             reprex_0.3.0             glue_1.4.2              
-[58] evaluate_0.14            RcppArmadillo_0.10.1.2.0 data.table_1.13.2       
-[61] modelr_0.1.8             vctrs_0.3.5              tweenr_1.0.2            
-[64] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
-[67] polyclip_1.10-0          assertthat_0.2.1         xfun_0.18               
-[70] lwgeom_0.2-5             broom_0.7.5              RcppEigen_0.3.3.7.0     
-[73] e1071_1.7-4              later_1.1.0.1            viridisLite_0.3.0       
-[76] ncdf4_1.17               class_7.3-17             ellipsis_0.3.1          </code></pre>
+ [7] bslib_0.2.5.1            utf8_1.1.4               R6_2.5.0                
+[10] KernSmooth_2.23-17       DBI_1.1.0                colorspace_2.0-2        
+[13] withr_2.3.0              tidyselect_1.1.0         compiler_4.0.3          
+[16] git2r_0.27.1             cli_3.0.1                rvest_0.3.6             
+[19] RNetCDF_2.4-2            xml2_1.3.2               labeling_0.4.2          
+[22] sass_0.4.0               scales_1.1.1             checkmate_2.0.0         
+[25] classInt_0.4-3           digest_0.6.27            rmarkdown_2.10          
+[28] pkgconfig_2.0.3          htmltools_0.5.1.1        highr_0.8               
+[31] dbplyr_1.4.4             rlang_0.4.11             readxl_1.3.1            
+[34] rstudioapi_0.13          PCICt_0.5-4.1            jquerylib_0.1.4         
+[37] generics_0.1.0           farver_2.0.3             jsonlite_1.7.1          
+[40] magrittr_1.5             ncmeta_0.3.0             Matrix_1.2-18           
+[43] Rcpp_1.0.5               munsell_0.5.0            fansi_0.4.1             
+[46] lifecycle_1.0.0          stringi_1.5.3            whisker_0.4             
+[49] yaml_2.2.1               MASS_7.3-53              grid_4.0.3              
+[52] blob_1.2.1               parallel_4.0.3           promises_1.1.1          
+[55] crayon_1.3.4             lattice_0.20-41          haven_2.3.1             
+[58] hms_0.5.3                knitr_1.33               pillar_1.6.2            
+[61] reprex_0.3.0             glue_1.4.2               evaluate_0.14           
+[64] RcppArmadillo_0.10.1.2.0 data.table_1.14.0        modelr_0.1.8            
+[67] vctrs_0.3.8              tweenr_1.0.2             httpuv_1.5.4            
+[70] cellranger_1.1.0         gtable_0.3.0             polyclip_1.10-0         
+[73] assertthat_0.2.1         xfun_0.25                lwgeom_0.2-5            
+[76] broom_0.7.9              RcppEigen_0.3.3.7.0      e1071_1.7-4             
+[79] later_1.2.0              viridisLite_0.3.0        ncdf4_1.17              
+[82] class_7.3-17             ellipsis_0.3.2          </code></pre>
 </div>
 </div>
 
@@ -3198,7 +1791,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -3212,6 +1805,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
