@@ -1,0 +1,147 @@
+---
+title: "Overview integrated time series"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+
+```{r set_paths, include=FALSE}
+
+path_cmorized_annual <-
+  "/net/kryo/work/loher/ROMS/RECCAP2/Atlantic_global_proto/submit_20210707/"
+
+```
+
+```{r load_libraries_specific, include=FALSE}
+library(stars)
+library(tidync)
+library(units)
+```
+
+# File names
+
+```{r define}
+
+overview <-
+  read_csv("data/overview/overview_files.csv")
+
+variables <-
+  overview %>%
+  filter(shape %in% c("T", "iT")) %>%
+  distinct(variable_id) %>%
+  pull()
+
+# set name of model to be subsetted
+# experiment_IDs <- c("A", "B", "C", "D")
+experiment_IDs <- c("A")
+
+```
+
+# Plots
+
+Below, please find plots of the variables in the following order:
+
+- `r variables`
+
+Plots for all variables are shown one after the other for the model runs:
+
+- `r experiment_IDs`
+
+## fgco2_glob
+
+```{r globally_integrated_2D_variables, fig.asp=0.5}
+
+for (i_experiment_ID in experiment_IDs) {
+  # i_experiment_ID <- experiment_IDs[1]
+
+    # read list of all files
+    file <- paste("fgco2_glob",
+                  "_ROMS-Atlantic-ETHZ_",
+                  i_experiment_ID,
+                  "_1_gr_1980-2018_v20210707.nc",
+                  sep = "")
+    print(file)
+    
+    # read in data
+    variable_data <-
+      tidync(paste(path_cmorized_annual,
+                   file,
+                   sep = ""))
+    
+    # convert to tibble
+    variable_data_tibble <- variable_data %>%
+      hyper_tibble()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    print(variable_data_tibble %>%
+            ggplot(aes(time_mon,
+                       fgco2_glob)) +
+            geom_path() +
+            labs(title = paste("experiment_ID:", i_experiment_ID)))
+
+}
+
+```
+
+
+## fgco2_reg
+
+```{r regionally_integrated_2D_variables, eval=FALSE,fig.asp=1}
+
+for (i_experiment_ID in experiment_IDs) {
+  # read list of all files
+  file <- paste("fgco2_reg",
+                "_ROMS-Atlantic-ETHZ_",
+                i_experiment_ID,
+                "_1_gr_1980-2018_v20210707.nc",
+                sep = "")
+  print(file)
+  
+  # read in data
+  variable_data <-
+    read_ncdf(paste(path_cmorized_annual,
+                    file,
+                    sep = ""))
+  
+  # convert to tibble
+  variable_data_tibble <- variable_data %>%
+    as_tibble()
+  
+  # drop units for plotting
+  variable_data_tibble <- variable_data_tibble %>%
+    drop_units() %>%
+    mutate(regions = as.factor(regions))
+  
+  # remove open link to nc file
+  rm(variable_data)
+  
+  print(
+    variable_data_tibble %>%
+      ggplot(aes(time_mon,
+                 fgco2_reg)) +
+      geom_hline(yintercept = 0, col = "red") +
+      geom_path() +
+      labs(title = paste("experiment_ID:", i_experiment_ID)) +
+      facet_grid(regions ~ .)
+  )
+  
+}
+
+```
+

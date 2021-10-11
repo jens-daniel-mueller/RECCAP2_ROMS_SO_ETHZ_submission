@@ -1,0 +1,163 @@
+---
+title: "Overview XYT variables"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+```{r set_paths, include=FALSE}
+
+path_cmorized_annual <-
+  "/net/kryo/work/loher/ROMS/RECCAP2/Atlantic_global_proto/submit_20210707/"
+
+```
+
+```{r load_libraries_specific, include=FALSE}
+library(stars)
+library(tidync)
+library(units)
+    
+```
+
+# File names
+
+```{r define}
+
+overview <-
+  read_csv("data/overview/overview_files.csv")
+
+variables <-
+  overview %>%
+  filter(shape == "XYT") %>%
+  distinct(variable_id) %>%
+  pull()
+
+# set name of model to be subsetted
+# experiment_IDs <- c("A", "B", "C", "D")
+experiment_IDs <- c("A")
+
+```
+
+# Plots
+
+Below, please find plots of the variables in the following order:
+
+- `r variables`
+
+Plots for all variables are shown one after the other for the model runs:
+
+- `r experiment_IDs`
+
+```{r 2D_variables, fig.asp=0.5}
+
+for (i_experiment_ID in experiment_IDs) {
+  for (i_variable in variables) {
+    # i_experiment_ID <- experiment_IDs[1]
+    # i_variable <- variables[1]
+    
+    # read list of all files
+    file <- paste(i_variable,
+                  "_ROMS-Atlantic-ETHZ_",
+                  i_experiment_ID,
+                  "_1_gr_1980-2018_v20210707.nc",
+                  sep = "")
+    print(file)
+    
+    # read in data
+    variable_data <-
+      read_ncdf(paste(path_cmorized_annual,
+                   file,
+                   sep = ""))
+
+    # convert to tibble
+    variable_data_tibble <- variable_data %>%
+      as_tibble()
+    
+    # drop units for plotting
+    variable_data_tibble <- variable_data_tibble %>% 
+      drop_units()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    variable_data_tibble_climatology <-
+      variable_data_tibble %>%
+      group_by(lat, lon) %>%
+      summarise(
+        "mean" := mean(!!sym(i_variable), na.rm = TRUE),
+        "min"  := min(!!sym(i_variable), na.rm = TRUE),
+        "max"  := max(!!sym(i_variable), na.rm = TRUE)
+      ) %>%
+      ungroup()
+    
+    variable_data_tibble_climatology <-
+      variable_data_tibble_climatology %>%
+      pivot_longer(c("mean", "min", "max"),
+                   values_to = i_variable,
+                   names_to = "parameter")
+    
+    print(
+      variable_data_tibble_climatology %>%
+        ggplot(aes(lon, lat, fill = !!sym(i_variable))) +
+        geom_raster(na.rm = TRUE) +
+        scale_fill_viridis_c(na.value=NA) +
+        coord_quickmap(expand = 0) +
+        facet_wrap( ~ parameter, ncol = 2) +
+        theme(axis.title = element_blank()) +
+        labs(title = paste("experiment_ID:", i_experiment_ID))
+    )
+    
+    variable_data_tibble_time_series <-
+      variable_data_tibble %>%
+      group_by(time_mon) %>%
+      summarise(
+        "mean" := mean(!!sym(i_variable), na.rm = TRUE),
+        "min"  := min(!!sym(i_variable), na.rm = TRUE),
+        "max"  := max(!!sym(i_variable), na.rm = TRUE)
+      ) %>%
+      ungroup()
+    
+    print(
+      variable_data_tibble_time_series %>%
+        ggplot() +
+        geom_ribbon(
+          aes(
+            x = time_mon,
+            ymin = min,
+            ymax = max,
+            fill = "min/max"
+          ),
+          alpha = 0.3
+        ) +
+        geom_path(aes(
+          x = time_mon,
+          y = mean,
+          col  = "mean"
+        )) +
+        scale_fill_viridis_d() +
+        scale_color_viridis_d() +
+        labs(
+          title = paste("experiment_ID:", i_experiment_ID),
+          y = i_variable
+        ) +
+        theme(legend.title = element_blank())
+    )
+    
+    
+  }
+}
+
+```

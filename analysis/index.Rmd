@@ -1,0 +1,28 @@
+---
+title: "Home"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+On this website we present some initial analysis of the ROMS-ETHZ model output submitted to RECCAP2-ocean.
+
+This initial analysis covers results from 4 model runs (A-D).
+
+The diagnostic plots differ for following types of variables:
+
+-   T: Regionally integrated time series data
+-   XYT: 2D-fields of variables with monthly resolution
+-   XYZT: 3D-fields of variables with annual resolution
+-   ancillary data
+
+Please navigate trough the navbar on top to take a look at the various chapters of this analysis. The links in the upper right corner bring you to the source code of this project and back to Jens' main homepage.
+
+© Dr. Jens Daniel Müller, ETH Zurich, 2021
