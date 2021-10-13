@@ -23,7 +23,7 @@ editor_options:
 ```{r set_paths, include=FALSE}
 
 path_cmorized_annual <-
-  "/net/kryo/work/loher/ROMS/RECCAP2/SO_d025_global_proto/submit_20211008/"
+  "/net/kryo/work/loher/ROMS/RECCAP2/SO_d025_global_proto/submit_20211012/"
 
 ```
 
@@ -66,7 +66,7 @@ i_variable
 
 # read list of all files
 file <- paste(i_variable,
-              "_ROMS-SouthernOcean-ETHZ_1_gr_1980-2018_v20211008.nc",
+              "_ROMS-SouthernOcean-ETHZ_1_gr_1980-2018_v20211012.nc",
               sep = "")
 print(file)
 
@@ -102,7 +102,7 @@ for (i_variable in variables) {
   
   # read list of all files
   file <- paste(i_variable,
-                "_ROMS-SouthernOcean-ETHZ_1_gr_v20211008.nc",
+                "_ROMS-SouthernOcean-ETHZ_1_gr_v20211012.nc",
                 sep = "")
   print(file)
   
@@ -149,7 +149,7 @@ for (i_variable in variables) {
   
   # read list of all files
   file <- paste(i_variable,
-                "_ROMS-SouthernOcean-ETHZ_1_gr_v20211008.nc",
+                "_ROMS-SouthernOcean-ETHZ_1_gr_v20211012.nc",
                 sep = "")
   print(file)
   
@@ -190,7 +190,7 @@ for (i_variable in variables) {
   
   # read list of all files
   file <- paste(i_variable,
-                "_ROMS-SouthernOcean-ETHZ_1_gr_v20211008.nc",
+                "_ROMS-SouthernOcean-ETHZ_1_gr_v20211012.nc",
                 sep = "")
   print(file)
   
