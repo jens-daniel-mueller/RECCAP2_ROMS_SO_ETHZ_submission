@@ -3,11 +3,13 @@ alpha,monthly,XYT,3,2D,22,A
 area,NA,NA,NA,NA,0.3,ancillary
 Area_tot_native,NA,NA,NA,NA,0,ancillary
 Atm_CO2,NA,NA,NA,NA,0,ancillary
+dfeos,monthly,XYT,2,2D,24.1,A
 dissic,annual,XYZT,1,3D,24.8,A
 dissicos,monthly,XYT,1,2D,19,A
 fgco2,monthly,XYT,1,2D,26.9,A
 fgco2_glob,monthly,T,1,2D,0,A
 fice,monthly,XYT,1,2D,1.1,A
+intzooc,monthly,XYT,1,2D,25.9,A
 mask_sfc,NA,NA,NA,NA,0.3,ancillary
 mask_vol,NA,NA,NA,NA,4.2,ancillary
 mld,monthly,XYT,1,2D,25.1,A
@@ -16,6 +18,11 @@ no3os,monthly,XYT,2,2D,25.2,A
 o2,annual,XYZT,2,3D,28,A
 o2os,monthly,XYT,2,2D,21.7,A
 pco2atm,monthly,XYT,2,2D,17.1,A
+po4,annual,XYZT,2,3D,31.4,A
+po4os,monthly,XYT,2,2D,24.2,A
+ROMS-SouthernOcean-ETHZ_Ancillary_data_v20211012.tar,NA,NA,NA,NA,8.9,ancillary
+si,annual,XYZT,2,3D,32.7,A
+sios,monthly,XYT,2,2D,25.2,A
 so,annual,XYZT,1,3D,23.5,A
 sos,monthly,XYT,1,2D,18.3,A
 spco2,monthly,XYT,1,2D,21.4,A
