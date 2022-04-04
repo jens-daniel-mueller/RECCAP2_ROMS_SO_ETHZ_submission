@@ -21,7 +21,7 @@ editor_options:
 ```{r set_paths, include=FALSE}
 
 path_cmorized_annual <-
-  "/net/kryo/work/loher/ROMS/RECCAP2_Jan2022/SO_d025_global_proto_runA/submit_20220325/"
+  "/net/kryo/work/loher/ROMS/RECCAP2_Jan2022/SO_d025_global_proto_runA/submit_20220404/"
 
 ```
 
@@ -72,7 +72,7 @@ for (i_experiment_ID in experiment_IDs) {
     file <- paste(i_variable,
                   "_ROMS-SouthernOcean-ETHZ_",
                   i_experiment_ID,
-                  "_1_gr_1980-2018_v20220325.nc",
+                  "_1_gr_1980-2018_v20220404.nc",
                   sep = "")
     print(file)
     
