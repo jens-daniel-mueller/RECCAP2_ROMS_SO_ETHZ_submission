@@ -117,7 +117,7 @@ for (i_experiment_ID in experiment_IDs) {
         scale_color_viridis_d() +
         labs(
           title = paste("experiment_ID:", i_experiment_ID),
-          y = i_variable
+          x = i_variable
         ) +
         theme(legend.title = element_blank())
     )

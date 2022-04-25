@@ -7,7 +7,7 @@
 # Repeated comments during work on the project ----------------------------
 
 # commit regular changes (locally) and rebuild site
-wflow_publish(all = TRUE, message = "revised description")
+wflow_publish(all = TRUE, message = "moved variable name from y to x axis")
 
 # commit changes including _site.yml (locally) and rebuild site in the specified order
 wflow_publish(here::here("analysis",
@@ -20,7 +20,7 @@ wflow_publish(here::here("analysis",
                            "diagnostics_variables_XYZT.Rmd",
                            "diagnostics_variables_ancillary.Rmd"
                          )),
-              message = "rebuild with v20211012, the submitted files",
+              message = "rebuild with v20220404",
               republish = TRUE)
 
 # Push latest version to GitHub
